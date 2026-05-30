@@ -1,0 +1,63 @@
+[2026-05-30T06:52:47.186+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-05-30T06:52:47.214+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: update_db.staging_table manual__2026-05-30T06:52:46.222537+00:00 [queued]>
+[2026-05-30T06:52:47.225+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: update_db.staging_table manual__2026-05-30T06:52:46.222537+00:00 [queued]>
+[2026-05-30T06:52:47.226+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-05-30T06:52:47.244+0000] {taskinstance.py:2330} INFO - Executing <Task(_PythonDecoratedOperator): staging_table> on 2026-05-30 06:52:46.222537+00:00
+[2026-05-30T06:52:47.250+0000] {standard_task_runner.py:63} INFO - Started process 459 to run task
+[2026-05-30T06:52:47.256+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'update_db', 'staging_table', 'manual__2026-05-30T06:52:46.222537+00:00', '--job-id', '47', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmp_wpo_v19']
+[2026-05-30T06:52:47.258+0000] {standard_task_runner.py:91} INFO - Job 47: Subtask staging_table
+[2026-05-30T06:52:47.337+0000] {task_command.py:426} INFO - Running <TaskInstance: update_db.staging_table manual__2026-05-30T06:52:46.222537+00:00 [running]> on host a3cc3fb864ad
+[2026-05-30T06:52:47.448+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='data@engineers.com' AIRFLOW_CTX_DAG_OWNER='dataengineers' AIRFLOW_CTX_DAG_ID='update_db' AIRFLOW_CTX_TASK_ID='staging_table' AIRFLOW_CTX_EXECUTION_DATE='2026-05-30T06:52:46.222537+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-30T06:52:46.222537+00:00'
+[2026-05-30T06:52:47.450+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-05-30T06:52:47.463+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2026-05-30T06:52:47.470+0000] {data_loading.py:12} INFO - Processing file: MrBeast_youtube_data_2026-05-30
+[2026-05-30T06:52:47.477+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2026-05-30T06:52:47.486+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2026-05-30T06:52:47.531+0000] {data_modification.py:80} INFO - Update row with video_id: 2XVcLrB7B3Y
+[2026-05-30T06:52:47.533+0000] {data_modification.py:101} ERROR - Error updating row with video_id: (7aE4EhHXzlA, zvBXpoBegwE, LTr8cXAxy1I, I046_n20d3s, qBiZA4QDsj0, rSuuQ_s8gOw, 0tZCQ25fsoI, tWYsfOSY9vY, bqpKlkPpT10, _f6xCA0-gAo, WRzIuC2MKOU, 5PCxQSMOl3o, Qw3eFnsSdlQ, ov0KQthQ50U, 9bqk6ZUsKyA, 5UPa_hu5opg, FM7Z-Xq8Drc, NbaWrbJDr48, EiFcNbXBqeo) - syntax error at or near "aE4EhHXzlA"
+LINE 3:             WHERE "video_id" IN (7aE4EhHXzlA, zvBXpoBegwE, L...
+                                          ^
+
+[2026-05-30T06:52:47.534+0000] {dwh.py:47} ERROR - An error occurred during the update of staging table: syntax error at or near "aE4EhHXzlA"
+LINE 3:             WHERE "video_id" IN (7aE4EhHXzlA, zvBXpoBegwE, L...
+                                          ^
+
+[2026-05-30T06:52:47.535+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-05-30T06:52:47.536+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/decorators/base.py", line 265, in execute
+    return_value = super().execute(context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/datawarehouse/dwh.py", line 48, in staging_table
+    raise e
+  File "/opt/airflow/dags/datawarehouse/dwh.py", line 42, in staging_table
+    delete_rows(cur, conn, schema, ids_to_delete)
+  File "/opt/airflow/dags/datawarehouse/data_modification.py", line 102, in delete_rows
+    raise e
+  File "/opt/airflow/dags/datawarehouse/data_modification.py", line 90, in delete_rows
+    cur.execute(
+  File "/home/airflow/.local/lib/python3.10/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.SyntaxError: syntax error at or near "aE4EhHXzlA"
+LINE 3:             WHERE "video_id" IN (7aE4EhHXzlA, zvBXpoBegwE, L...
+                                          ^
+
+[2026-05-30T06:52:47.564+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=update_db, task_id=staging_table, run_id=manual__2026-05-30T06:52:46.222537+00:00, execution_date=20260530T065246, start_date=20260530T065247, end_date=20260530T065247
+[2026-05-30T06:52:47.578+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 47 for task staging_table (syntax error at or near "aE4EhHXzlA"
+LINE 3:             WHERE "video_id" IN (7aE4EhHXzlA, zvBXpoBegwE, L...
+                                          ^
+; 459)
+[2026-05-30T06:52:47.589+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-05-30T06:52:47.616+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-05-30T06:52:47.622+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

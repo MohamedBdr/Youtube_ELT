@@ -1,0 +1,91 @@
+[2026-05-27T14:20:13.837+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-05-27T14:20:13.860+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_quality.soda_test_staging manual__2026-05-27T14:20:12.632847+00:00 [queued]>
+[2026-05-27T14:20:13.869+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_quality.soda_test_staging manual__2026-05-27T14:20:12.632847+00:00 [queued]>
+[2026-05-27T14:20:13.870+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-05-27T14:20:13.884+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): soda_test_staging> on 2026-05-27 14:20:12.632847+00:00
+[2026-05-27T14:20:13.889+0000] {standard_task_runner.py:63} INFO - Started process 1920 to run task
+[2026-05-27T14:20:13.895+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'data_quality', 'soda_test_staging', 'manual__2026-05-27T14:20:12.632847+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpgih8x44i']
+[2026-05-27T14:20:13.896+0000] {standard_task_runner.py:91} INFO - Job 15: Subtask soda_test_staging
+[2026-05-27T14:20:13.961+0000] {task_command.py:426} INFO - Running <TaskInstance: data_quality.soda_test_staging manual__2026-05-27T14:20:12.632847+00:00 [running]> on host 45f4c0936dbd
+[2026-05-27T14:20:14.048+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='data@engineers.com' AIRFLOW_CTX_DAG_OWNER='dataengineers' AIRFLOW_CTX_DAG_ID='data_quality' AIRFLOW_CTX_TASK_ID='soda_test_staging' AIRFLOW_CTX_EXECUTION_DATE='2026-05-27T14:20:12.632847+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-27T14:20:12.632847+00:00'
+[2026-05-27T14:20:14.049+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-05-27T14:20:14.051+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-05-27T14:20:14.052+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'soda scan -d pg_datasource -c /opt/airflow/include/soda/configuration.yml -v SCHEMA=staging /opt/airflow/include/soda/checks.yml']
+[2026-05-27T14:20:14.062+0000] {subprocess.py:86} INFO - Output:
+[2026-05-27T14:20:15.298+0000] {subprocess.py:93} INFO - [14:20:15] Soda Core 3.3.14
+[2026-05-27T14:20:15.442+0000] {subprocess.py:93} INFO - [14:20:15] Scan summary:
+[2026-05-27T14:20:15.443+0000] {subprocess.py:93} INFO - [14:20:15] 4/4 checks PASSED:
+[2026-05-27T14:20:15.444+0000] {subprocess.py:93} INFO - [14:20:15]     yt_api in pg_datasource
+[2026-05-27T14:20:15.444+0000] {subprocess.py:93} INFO - [14:20:15]       Check for like_count greater than video_views [PASSED]
+[2026-05-27T14:20:15.447+0000] {subprocess.py:93} INFO - [14:20:15]       Check for comments_count greater than video_views [PASSED]
+[2026-05-27T14:20:15.447+0000] {subprocess.py:93} INFO - [14:20:15]       missing_count("video_id") = 0 [PASSED]
+[2026-05-27T14:20:15.448+0000] {subprocess.py:93} INFO - [14:20:15]       duplicate_count("video_id") = 0 [PASSED]
+[2026-05-27T14:20:15.449+0000] {subprocess.py:93} INFO - [14:20:15] All is good. No failures. No warnings. No errors.
+[2026-05-27T14:20:15.817+0000] {subprocess.py:93} INFO - Exception while exporting Span batch.
+[2026-05-27T14:20:15.820+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-27T14:20:15.821+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+[2026-05-27T14:20:15.822+0000] {subprocess.py:93} INFO -     self._validate_conn(conn)
+[2026-05-27T14:20:15.823+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1099, in _validate_conn
+[2026-05-27T14:20:15.823+0000] {subprocess.py:93} INFO -     conn.connect()
+[2026-05-27T14:20:15.824+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connection.py", line 653, in connect
+[2026-05-27T14:20:15.826+0000] {subprocess.py:93} INFO -     sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+[2026-05-27T14:20:15.827+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connection.py", line 806, in _ssl_wrap_socket_and_match_hostname
+[2026-05-27T14:20:15.827+0000] {subprocess.py:93} INFO -     ssl_sock = ssl_wrap_socket(
+[2026-05-27T14:20:15.828+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 465, in ssl_wrap_socket
+[2026-05-27T14:20:15.829+0000] {subprocess.py:93} INFO -     ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+[2026-05-27T14:20:15.830+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 509, in _ssl_wrap_socket_impl
+[2026-05-27T14:20:15.830+0000] {subprocess.py:93} INFO -     return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+[2026-05-27T14:20:15.831+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.10/ssl.py", line 513, in wrap_socket
+[2026-05-27T14:20:15.832+0000] {subprocess.py:93} INFO -     return self.sslsocket_class._create(
+[2026-05-27T14:20:15.832+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.10/ssl.py", line 1104, in _create
+[2026-05-27T14:20:15.833+0000] {subprocess.py:93} INFO -     self.do_handshake()
+[2026-05-27T14:20:15.834+0000] {subprocess.py:93} INFO -   File "/usr/local/lib/python3.10/ssl.py", line 1375, in do_handshake
+[2026-05-27T14:20:15.834+0000] {subprocess.py:93} INFO -     self._sslobj.do_handshake()
+[2026-05-27T14:20:15.835+0000] {subprocess.py:93} INFO - ssl.SSLError: [SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED] unsafe legacy renegotiation disabled (_ssl.c:1007)
+[2026-05-27T14:20:15.836+0000] {subprocess.py:93} INFO - 
+[2026-05-27T14:20:15.837+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-27T14:20:15.837+0000] {subprocess.py:93} INFO - 
+[2026-05-27T14:20:15.838+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-27T14:20:15.838+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+[2026-05-27T14:20:15.839+0000] {subprocess.py:93} INFO -     response = self._make_request(
+[2026-05-27T14:20:15.840+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+[2026-05-27T14:20:15.841+0000] {subprocess.py:93} INFO -     raise new_e
+[2026-05-27T14:20:15.842+0000] {subprocess.py:93} INFO - urllib3.exceptions.SSLError: [SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED] unsafe legacy renegotiation disabled (_ssl.c:1007)
+[2026-05-27T14:20:15.843+0000] {subprocess.py:93} INFO - 
+[2026-05-27T14:20:15.844+0000] {subprocess.py:93} INFO - The above exception was the direct cause of the following exception:
+[2026-05-27T14:20:15.845+0000] {subprocess.py:93} INFO - 
+[2026-05-27T14:20:15.845+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-27T14:20:15.846+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+[2026-05-27T14:20:15.846+0000] {subprocess.py:93} INFO -     resp = conn.urlopen(
+[2026-05-27T14:20:15.847+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+[2026-05-27T14:20:15.848+0000] {subprocess.py:93} INFO -     retries = retries.increment(
+[2026-05-27T14:20:15.849+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/urllib3/util/retry.py", line 515, in increment
+[2026-05-27T14:20:15.849+0000] {subprocess.py:93} INFO -     raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+[2026-05-27T14:20:15.850+0000] {subprocess.py:93} INFO - urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='collect.soda.io', port=443): Max retries exceeded with url: /v1/traces (Caused by SSLError(SSLError(1, '[SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED] unsafe legacy renegotiation disabled (_ssl.c:1007)')))
+[2026-05-27T14:20:15.851+0000] {subprocess.py:93} INFO - 
+[2026-05-27T14:20:15.852+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2026-05-27T14:20:15.853+0000] {subprocess.py:93} INFO - 
+[2026-05-27T14:20:15.854+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2026-05-27T14:20:15.855+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/opentelemetry/sdk/trace/export/__init__.py", line 368, in _export_batch
+[2026-05-27T14:20:15.855+0000] {subprocess.py:93} INFO -     self.span_exporter.export(self.spans_list[:idx])  # type: ignore
+[2026-05-27T14:20:15.856+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/soda/telemetry/soda_exporter.py", line 54, in export
+[2026-05-27T14:20:15.857+0000] {subprocess.py:93} INFO -     return super().export(get_soda_spans(spans))
+[2026-05-27T14:20:15.858+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/opentelemetry/exporter/otlp/proto/http/trace_exporter/__init__.py", line 145, in export
+[2026-05-27T14:20:15.859+0000] {subprocess.py:93} INFO -     resp = self._export(serialized_data)
+[2026-05-27T14:20:15.860+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/opentelemetry/exporter/otlp/proto/http/trace_exporter/__init__.py", line 114, in _export
+[2026-05-27T14:20:15.861+0000] {subprocess.py:93} INFO -     return self._session.post(
+[2026-05-27T14:20:15.862+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/requests/sessions.py", line 637, in post
+[2026-05-27T14:20:15.862+0000] {subprocess.py:93} INFO -     return self.request("POST", url, data=data, json=json, **kwargs)
+[2026-05-27T14:20:15.863+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+[2026-05-27T14:20:15.864+0000] {subprocess.py:93} INFO -     resp = self.send(prep, **send_kwargs)
+[2026-05-27T14:20:15.864+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+[2026-05-27T14:20:15.865+0000] {subprocess.py:93} INFO -     r = adapter.send(request, **kwargs)
+[2026-05-27T14:20:15.866+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.10/site-packages/requests/adapters.py", line 517, in send
+[2026-05-27T14:20:15.866+0000] {subprocess.py:93} INFO -     raise SSLError(e, request=request)
+[2026-05-27T14:20:15.867+0000] {subprocess.py:93} INFO - requests.exceptions.SSLError: HTTPSConnectionPool(host='collect.soda.io', port=443): Max retries exceeded with url: /v1/traces (Caused by SSLError(SSLError(1, '[SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED] unsafe legacy renegotiation disabled (_ssl.c:1007)')))
+[2026-05-27T14:20:15.949+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-05-27T14:20:15.951+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-05-27T14:20:15.997+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=data_quality, task_id=soda_test_staging, run_id=manual__2026-05-27T14:20:12.632847+00:00, execution_date=20260527T142012, start_date=20260527T142013, end_date=20260527T142015
+[2026-05-27T14:20:16.036+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-05-27T14:20:16.074+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-05-27T14:20:16.077+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

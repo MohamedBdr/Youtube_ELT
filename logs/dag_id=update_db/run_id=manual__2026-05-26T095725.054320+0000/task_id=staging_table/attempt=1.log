@@ -1,0 +1,54 @@
+[2026-05-26T09:57:26.084+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-05-26T09:57:26.104+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: update_db.staging_table manual__2026-05-26T09:57:25.054320+00:00 [queued]>
+[2026-05-26T09:57:26.111+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: update_db.staging_table manual__2026-05-26T09:57:25.054320+00:00 [queued]>
+[2026-05-26T09:57:26.112+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-05-26T09:57:26.123+0000] {taskinstance.py:2330} INFO - Executing <Task(_PythonDecoratedOperator): staging_table> on 2026-05-26 09:57:25.054320+00:00
+[2026-05-26T09:57:26.127+0000] {standard_task_runner.py:63} INFO - Started process 204 to run task
+[2026-05-26T09:57:26.132+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'update_db', 'staging_table', 'manual__2026-05-26T09:57:25.054320+00:00', '--job-id', '51', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmplya0hr66']
+[2026-05-26T09:57:26.134+0000] {standard_task_runner.py:91} INFO - Job 51: Subtask staging_table
+[2026-05-26T09:57:26.203+0000] {task_command.py:426} INFO - Running <TaskInstance: update_db.staging_table manual__2026-05-26T09:57:25.054320+00:00 [running]> on host 9a60ef36f17b
+[2026-05-26T09:57:26.279+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='data@engineers.com' AIRFLOW_CTX_DAG_OWNER='dataengineers' AIRFLOW_CTX_DAG_ID='update_db' AIRFLOW_CTX_TASK_ID='staging_table' AIRFLOW_CTX_EXECUTION_DATE='2026-05-26T09:57:25.054320+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-05-26T09:57:25.054320+00:00'
+[2026-05-26T09:57:26.280+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-05-26T09:57:26.288+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2026-05-26T09:57:26.293+0000] {data_loading.py:12} INFO - Processing file: MrBeast_youtube_data_2026-05-26
+[2026-05-26T09:57:26.297+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2026-05-26T09:57:26.304+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2026-05-26T09:57:26.310+0000] {dwh.py:47} ERROR - An error occurred during the update of staging table: ('video_id',)
+[2026-05-26T09:57:26.311+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-05-26T09:57:26.311+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/datawarehouse/data_modification.py", line 57, in update_rows
+    cur.execute(f'''
+  File "/home/airflow/.local/lib/python3.10/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+KeyError: "('title',"
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/decorators/base.py", line 265, in execute
+    return_value = super().execute(context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/datawarehouse/dwh.py", line 48, in staging_table
+    raise e
+  File "/opt/airflow/dags/datawarehouse/dwh.py", line 33, in staging_table
+    update_rows(cur, conn, schema, row)
+  File "/opt/airflow/dags/datawarehouse/data_modification.py", line 71, in update_rows
+    logger.error(f"Error updating row with video_id: {row[video_id]} - {e}")
+KeyError: ('video_id',)
+[2026-05-26T09:57:26.331+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=update_db, task_id=staging_table, run_id=manual__2026-05-26T09:57:25.054320+00:00, execution_date=20260526T095725, start_date=20260526T095726, end_date=20260526T095726
+[2026-05-26T09:57:26.341+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 51 for task staging_table (('video_id',); 204)
+[2026-05-26T09:57:26.385+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2026-05-26T09:57:26.406+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-05-26T09:57:26.410+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

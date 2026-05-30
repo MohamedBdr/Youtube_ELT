@@ -1,0 +1,21 @@
+[2026-05-27T13:11:16.110+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-05-27T13:11:16.143+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: update_db.core_table scheduled__2026-05-26T12:00:00+00:00 [queued]>
+[2026-05-27T13:11:16.165+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: update_db.core_table scheduled__2026-05-26T12:00:00+00:00 [queued]>
+[2026-05-27T13:11:16.167+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-05-27T13:11:16.189+0000] {taskinstance.py:2330} INFO - Executing <Task(_PythonDecoratedOperator): core_table> on 2026-05-26 12:00:00+00:00
+[2026-05-27T13:11:16.195+0000] {standard_task_runner.py:63} INFO - Started process 1400 to run task
+[2026-05-27T13:11:16.201+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'update_db', 'core_table', 'scheduled__2026-05-26T12:00:00+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmpwh_w_4px']
+[2026-05-27T13:11:16.203+0000] {standard_task_runner.py:91} INFO - Job 10: Subtask core_table
+[2026-05-27T13:11:16.301+0000] {task_command.py:426} INFO - Running <TaskInstance: update_db.core_table scheduled__2026-05-26T12:00:00+00:00 [running]> on host 45f4c0936dbd
+[2026-05-27T13:11:16.421+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='data@engineers.com' AIRFLOW_CTX_DAG_OWNER='dataengineers' AIRFLOW_CTX_DAG_ID='update_db' AIRFLOW_CTX_TASK_ID='core_table' AIRFLOW_CTX_EXECUTION_DATE='2026-05-26T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-05-26T12:00:00+00:00'
+[2026-05-27T13:11:16.425+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-05-27T13:11:16.439+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2026-05-27T13:11:16.447+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2026-05-27T13:11:16.458+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2026-05-27T13:11:16.516+0000] {dwh.py:96} INFO - core table update completed
+[2026-05-27T13:11:16.518+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-05-27T13:11:16.520+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-05-27T13:11:16.531+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=update_db, task_id=core_table, run_id=scheduled__2026-05-26T12:00:00+00:00, execution_date=20260526T120000, start_date=20260527T131116, end_date=20260527T131116
+[2026-05-27T13:11:16.574+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-05-27T13:11:16.604+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-05-27T13:11:16.607+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
